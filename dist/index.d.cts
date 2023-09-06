@@ -1,4 +1,4 @@
-export default interface InvoiceType {
+interface InvoiceType {
     DocumentType?: 1 | 'invoice' | 2 | 'credit note' | 3 | 'debit note' | 4 | 'proforma invoice' | 5 | 'advance invoice' | 6 | 'advance credit note' | 7 | 'simplified';
     SubDocumentType?: string;
     SubDocumentTypeOrigin?: string;
@@ -42,68 +42,68 @@ export default interface InvoiceType {
     PaymentMeans?: PaymentMeans;
     SupplementsList?: any;
 }
-export interface AccountingCustomerParty {
+interface AccountingCustomerParty {
     Party?: Party;
 }
-export interface AccountingSupplierParty {
+interface AccountingSupplierParty {
     Party: Party;
 }
-export interface SellerSupplierParty {
+interface SellerSupplierParty {
     Party: Party;
 }
-export interface BuyerCustomerParty {
+interface BuyerCustomerParty {
     Party: Party;
 }
-export interface Delivery {
+interface Delivery {
     Party: Party;
 }
-export interface Party {
+interface Party {
     PartyIdentification: PartyIdentification;
     PartyName: PartyName;
     PostalAddress: PostalAddress;
     PartyTaxScheme?: PartyTaxScheme;
     Contact?: FluffyContact;
 }
-export interface PartyIdentification {
+interface PartyIdentification {
     UserID?: string;
     CatalogFirmIdentification?: string;
     ID?: string;
 }
-export interface PartyName {
+interface PartyName {
     Name: string;
 }
-export interface PartyTaxScheme {
+interface PartyTaxScheme {
     CompanyID: string;
     TaxScheme: string;
 }
-export interface PostalAddress {
+interface PostalAddress {
     StreetName?: string;
     BuildingNumber?: string;
     CityName?: string;
     PostalZone?: string;
     Country?: Country;
 }
-export interface Country {
+interface Country {
     IdentificationCode?: string;
     Name?: string;
 }
-export interface FluffyContact {
+interface FluffyContact {
     Name?: string;
     Telephone?: string;
     ElectronicMail?: string;
 }
-export interface DeliveryNoteReferences {
+interface DeliveryNoteReferences {
     DeliveryNoteReference: DeliveryNoteReferencesDeliveryNoteReference;
 }
-export interface DeliveryNoteReferencesDeliveryNoteReference {
+interface DeliveryNoteReferencesDeliveryNoteReference {
     ID?: string | number;
     IssueDate?: string | Date;
     $_id?: string | number;
 }
-export interface InvoiceLines {
+interface InvoiceLines {
     InvoiceLine?: InvoiceLine[];
 }
-export interface InvoiceLine {
+interface InvoiceLine {
     ID: string | number;
     InvoicedQuantity: number | InvoicedQuantity;
     LineExtensionAmount: string | number;
@@ -118,20 +118,20 @@ export interface InvoiceLine {
     Item?: Item;
     DeliveryNoteReference?: InvoiceLineDeliveryNoteReference;
 }
-export interface ClassifiedTaxCategory {
+interface ClassifiedTaxCategory {
     Percent: string | number;
     VATCalculationMethod: string | number;
     VATApplicable: string | boolean;
 }
-export interface InvoiceLineDeliveryNoteReference {
+interface InvoiceLineDeliveryNoteReference {
     LineID?: string | number;
     $_ref?: string | number;
 }
-export interface InvoicedQuantity {
+interface InvoicedQuantity {
     $_unitCode?: string;
     '#text'?: string | number;
 }
-export interface Item {
+interface Item {
     Description: string;
     CatalogueItemIdentification?: ItemIdentification;
     SellersItemIdentification?: ItemIdentification;
@@ -139,10 +139,10 @@ export interface Item {
     TertiarySellersItemIdentification?: ItemIdentification;
     BuyersItemIdentification?: ItemIdentification;
 }
-export interface ItemIdentification {
+interface ItemIdentification {
     ID: string | number;
 }
-export interface LegalMonetaryTotal {
+interface LegalMonetaryTotal {
     TaxExclusiveAmount: string | number;
     TaxInclusiveAmount: string | number;
     TaxInclusiveAmountCurr?: string | number;
@@ -156,15 +156,15 @@ export interface LegalMonetaryTotal {
     PaidDepositsAmount: string | number;
     PayableAmount: string | number;
 }
-export interface PaymentMeans {
+interface PaymentMeans {
     Payment?: Payment;
 }
-export interface Payment {
+interface Payment {
     PaidAmount?: string | number;
     PaymentMeansCode?: string | number;
     Details?: Details;
 }
-export interface Details {
+interface Details {
     PaymentDueDate?: Date | string;
     ID?: string | number;
     BankCode?: string | number;
@@ -175,11 +175,11 @@ export interface Details {
     ConstantSymbol?: string | number;
     SpecificSymbol?: string | number;
 }
-export interface TaxTotal {
+interface TaxTotal {
     TaxSubTotal: TaxSubTotal;
     TaxAmount: string | number;
 }
-export interface TaxSubTotal {
+interface TaxSubTotal {
     TaxableAmount: string | number;
     TaxAmount: string | number;
     TaxInclusiveAmount: string | number;
@@ -194,8 +194,62 @@ export interface TaxSubTotal {
     DifferenceTaxInclusiveAmountCurr?: string | number;
     TaxCategory: TaxCategory;
 }
-export interface TaxCategory {
+interface TaxCategory {
     Percent?: string | number;
     VATApplicable?: string | boolean;
     LocalReverseChargeFlag?: string | boolean;
 }
+
+declare class Invoice {
+    DocumentType: number;
+    SubDocumentType?: string;
+    SubDocumentTypeOrigin?: string;
+    TargetConsolidator?: string;
+    ClientOnTargetConsolidator?: string;
+    ClientBankAccount?: string;
+    ID?: string;
+    ID36?: string;
+    UUID?: string;
+    EgovFlag?: boolean;
+    ISDS_ID?: string;
+    FileReference?: string;
+    ReferenceNumber?: string;
+    EgovClassifiers?: any;
+    IssuingSystem?: string;
+    IssueDate?: string | Date;
+    TaxPointDate?: string | Date;
+    VATApplicable?: string;
+    ElectronicPossibilityAgreementReference: string;
+    Note?: string;
+    LocalCurrencyCode: string;
+    ForeignCurrencyCode?: string;
+    CurrRate: number | string;
+    RefCurrRate: number | string;
+    Extensions?: any;
+    AccountingSupplierParty?: AccountingSupplierParty;
+    SellerSupplierParty?: SellerSupplierParty;
+    AnonymousCustomerParty?: any;
+    AccountingCustomerParty?: AccountingCustomerParty;
+    BuyerCustomerParty?: BuyerCustomerParty;
+    OrderReferences?: any;
+    OriginalDocumentReferences?: any;
+    ContractReferences?: any;
+    Delivery?: Delivery;
+    DeliveryNoteReferences?: DeliveryNoteReferences;
+    InvoiceLines?: InvoiceLines;
+    NonTaxedDeposits?: any;
+    TaxedDeposits?: any;
+    TaxTotal?: TaxTotal;
+    LegalMonetaryTotal?: LegalMonetaryTotal;
+    PaymentMeans?: PaymentMeans;
+    SupplementsList?: any;
+    private $_xmlns;
+    private $_version;
+    constructor(data?: InvoiceType | string | Buffer);
+    assign(data: InvoiceType, validate?: boolean): void;
+    validate(xml?: string): true;
+    toXML(validate?: boolean): string;
+    toJSON(): string;
+}
+
+export { InvoiceType, Invoice as default };

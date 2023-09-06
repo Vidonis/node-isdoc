@@ -1,33 +1,43 @@
 {
-  "name": "@deltazero/isdoc",
-  "version": "0.1.1",
+  "name": "@vidonis/isdoc",
+  "version": "0.1.2",
   "description": "Create ISDOC - Czechia's standard invoice format for data exchange",
   "author": "ΔO - David Obdržálek <david@deltazero.cz>",
   "license": "ISC",
   "keywords": [
     "isdoc"
   ],
-  "main": "index.js",
-  "types": "index.d.ts",
+  "type": "module",
+  "files": [
+    "dist/**"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "pretest": "tsc",
     "test": "mocha tests",
-    "build": "tsc -b",
+    "build": "tsup",
     "prepare": "npm run build"
   },
   "repository": "deltazero-cz/node-isdoc",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
   "dependencies": {
-    "fast-xml-parser": "^4.0.9"
+    "fast-xml-parser": "^4.2.7"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.3",
+    "@types/chai": "^4.3.6",
     "@types/mocha": "^9.1.1",
-    "@types/node": "^16.0.0",
-    "chai": "^4.3.6",
-    "mocha": "^10.0.0",
-    "typescript": "latest"
+    "@types/node": "^16.18.48",
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2"
   }
 }
